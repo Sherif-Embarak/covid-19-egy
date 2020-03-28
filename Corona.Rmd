@@ -30,9 +30,9 @@ df$Day <- mdy(df$Day)
 df$Day <- paste(day(df$Day) , months.Date(df$Day) )
 df$Curfew <- as.character(df$Curfew)
 df <- df[,1:8]
-total_cases <- sum(df$New.Cases)
-total_deaths <- sum(df$New.Deaths)
-total_recovered <- sum(df$New.Recovered)
+total_cases <- df$Total.Cases[nrow(df)]
+total_deaths <- df$Total.Deaths[nrow(df)]
+total_recovered <- df$Total.Recovered[nrow(df)]
 library(crosstalk)
 hk <- highlight_key(df)
 
