@@ -98,7 +98,7 @@ Row
 valueBox(paste("Cloded Cases (Cases which had an outcome): ",closed))
 ```
 
-### Active Cases
+### Currently Infected Patients
 
 ```{r, echo=FALSE}
 valueBox(paste("Active Cases: ",active))
