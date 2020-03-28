@@ -33,6 +33,8 @@ df <- df[,1:8]
 total_cases <- df$Total.Cases[nrow(df)]
 total_deaths <- df$Total.Deaths[nrow(df)]
 total_recovered <- df$Total.Recovered[nrow(df)]
+closed <- total_deaths+total_recovered
+active <- total_cases - closed
 library(crosstalk)
 hk <- highlight_key(df)
 
@@ -66,25 +68,40 @@ chart6 <- ggplotly(ggplot(data=hk, aes(x=Day, y=Total.Recovered, group=1))+
 Dashboard
 =======================================================================
 
-Row{.no-mobile}
+Row
 -----------------------------------------------------------------------
 
-### Total Coronavirus Cases in Egypt {.no-mobile}
+### Total Coronavirus Cases in Egypt
 
 ```{r, echo=FALSE}
 valueBox(total_cases, icon = "fa-area-chart")
 ```
 
-### Total Coronavirus Deaths in Egypt {.no-mobile}
+### Total Coronavirus Deaths in Egypt 
 
 ```{r, echo=FALSE}
 valueBox(total_deaths, icon = "fa-area-chart" , color="warning")
 ```
 
-### Total Coronavirus Recovered Cases in Egypt {.no-mobile}
+### Total Coronavirus Recovered Cases in Egypt
 
 ```{r, echo=FALSE}
 valueBox(total_recovered, icon = "fa-area-chart" , color = "#00DDDD")
+```
+
+Row
+-----------------------------------------------------------------------
+
+### ``r paste("Deaths/Discharged :",   total_deaths, "(", round((total_deaths/closed)*100,1),"% ),","               ",paste("Recovered/Discharged :",   total_recovered, "(", round((total_recovered/closed)*100,1),"% )"))``
+
+```{r, echo=FALSE}
+valueBox(paste("Cloded Cases (Cases which had an outcome): ",closed))
+```
+
+### Active Cases
+
+```{r, echo=FALSE}
+valueBox(paste("Active Cases: ",active))
 ```
 
 Row1{data-width=20}
