@@ -1,7 +1,7 @@
 ---
-title: "Corona Egypt"
-author: "Sheirf Embarak"
-date: "March 28, 2020"
+title: "Covid-19 in Egypt"
+author:
+  - Sherif Embarak^[https://github.com/Sherif-Embarak/]
 output:
   flexdashboard::flex_dashboard:
     theme: lumen
