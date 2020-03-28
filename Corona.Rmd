@@ -1,0 +1,139 @@
+---
+title: "Corona Egypt"
+author: "Sheirf Embarak"
+date: "March 28, 2020"
+output:
+  flexdashboard::flex_dashboard:
+    theme: lumen
+    social: menu
+    source: embed
+    vertical_layout: scroll
+    orientation: rows
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+rm(list=ls(all=TRUE))
+options(stringsAsFactors = FALSE)
+library(ggplot2)
+library(plotly)
+library(flexdashboard)
+library(DT)
+library(plotly)
+library(knitr)
+library(lubridate)
+library(crosstalk)
+
+setwd("D:/work/corona/")
+df <- read.csv("eg_covid.csv")
+df$Day <- mdy(df$Day)
+df$Day <- paste(day(df$Day) , months.Date(df$Day) )
+df$Curfew <- as.character(df$Curfew)
+df <- df[,1:8]
+total_cases <- sum(df$New.Cases)
+total_deaths <- sum(df$New.Deaths)
+total_recovered <- sum(df$New.Recovered)
+library(crosstalk)
+hk <- highlight_key(df)
+
+chart1 <-ggplotly(ggplot(hk, aes(x=Day, y=New.Cases, fill=Curfew)) + 
+  geom_bar(stat = "identity")+scale_fill_brewer(palette="Paired")+
+  theme(axis.text.x = element_text(angle = 70, hjust = 1))) %>%
+       highlight() 
+
+chart2 <-ggplotly(ggplot(hk, aes(x=Day, y=New.Deaths, fill=Curfew)) + 
+  geom_bar(stat = "identity")+scale_fill_brewer(palette="Paired")+
+  theme(axis.text.x = element_text(angle = 70, hjust = 1))) %>%
+       highlight() 
+chart3 <-ggplotly(ggplot(hk, aes(x=Day, y=New.Recovered, fill=Curfew)) + 
+  geom_bar(stat = "identity")+scale_fill_brewer(palette="Paired")+
+  theme(axis.text.x = element_text(angle = 70, hjust = 1))) %>%
+       highlight() 
+
+chart4 <- ggplotly(ggplot(data=hk, aes(x=Day, y=Total.Cases, group=1))+
+ geom_line(color="#FF9900", size=1)+theme(axis.text.x = element_text(angle = 70, hjust = 1))+
+  geom_point(color="#FF9900"))
+
+chart5 <- ggplotly(ggplot(data=hk, aes(x=Day, y=Total.Deaths, group=1))+
+ geom_line(color="#00DDDD", size=1)+theme(axis.text.x = element_text(angle = 70, hjust = 1))+
+  geom_point(color="#00DDDD"))
+
+chart6 <- ggplotly(ggplot(data=hk, aes(x=Day, y=Total.Recovered, group=1))+
+ geom_line(color="#33CCFF", size=1)+theme(axis.text.x = element_text(angle = 70, hjust = 1))+
+  geom_point(color="#33CCFF"))
+```
+
+Dashboard
+=======================================================================
+
+Row
+-----------------------------------------------------------------------
+
+### Total Coronavirus Cases in Egypt
+
+```{r, echo=FALSE}
+valueBox(total_cases, icon = "fa-area-chart")
+```
+
+### Total Coronavirus Deaths in Egypt
+
+```{r, echo=FALSE}
+valueBox(total_deaths, icon = "fa-area-chart" , color="warning")
+```
+
+### Total Coronavirus Recovered Cases in Egypt
+
+```{r, echo=FALSE}
+valueBox(total_recovered, icon = "fa-area-chart" , color = "#00DDDD")
+```
+
+Row1{data-width=20}
+-------------------------------------
+    
+### Distibution of Cases
+    
+```{r, echo=FALSE, warning=FALSE,message=FALSE,results='asis',fig.show='asis'}
+DT::datatable(hk,options = list(pageLength = 50))
+```
+   
+Row2
+-------------------------------------
+    
+### Confirmed Cases per day
+    
+```{r, echo=FALSE, warning=FALSE,message=FALSE,results='asis',fig.show='asis'}
+chart1
+```
+    
+### Deaths per day
+
+```{r, echo=FALSE, warning=FALSE,message=FALSE,results='asis',fig.show='asis'}
+chart2
+```
+
+### Recovered Cases per day
+
+```{r, echo=FALSE, warning=FALSE,message=FALSE,results='asis',fig.show='asis'}
+chart3
+```
+
+Row3
+-------------------------------------
+    
+### Total Confirmed Cases
+    
+```{r, echo=FALSE, warning=FALSE,message=FALSE,results='asis',fig.show='asis'}
+chart4
+```
+    
+### Total Deaths
+
+```{r, echo=FALSE, warning=FALSE,message=FALSE,results='asis',fig.show='asis'}
+chart5
+```
+
+### Total Recovered
+
+```{r, echo=FALSE, warning=FALSE,message=FALSE,results='asis',fig.show='asis'}
+chart6
+```
