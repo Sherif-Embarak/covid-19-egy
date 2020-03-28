@@ -1,7 +1,7 @@
 ---
 title: "Covid-19 in Egypt"
-author:
-  - Sherif Embarak^[https://github.com/Sherif-Embarak/]
+date:  "Last update: `r Sys.time()`"
+author: Sherif Embarak^[https://github.com/Sherif-Embarak/]
 output:
   flexdashboard::flex_dashboard:
     theme: lumen
