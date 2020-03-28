@@ -24,7 +24,7 @@ library(knitr)
 library(lubridate)
 library(crosstalk)
 
-setwd("D:/work/corona/")
+setwd("D:/work/git corona/")
 df <- read.csv("eg_covid.csv")
 df$Day <- mdy(df$Day)
 df$Day <- paste(day(df$Day) , months.Date(df$Day) )
