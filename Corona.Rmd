@@ -44,16 +44,16 @@ library(crosstalk)
 hk <- highlight_key(df)
 
 chart1 <-ggplotly(ggplot(hk, aes(x=Day, y=New.Cases, fill=Curfew)) + 
-  geom_bar(stat = "identity")+scale_fill_brewer(palette="Paired")+
+  geom_bar(width = 0.3, stat = "identity")+scale_fill_manual(values = c("#6698FF", "#153E7E"))+
   theme(axis.text.x = element_text(angle = 70, hjust = 1))) %>%
        highlight() 
 
 chart2 <-ggplotly(ggplot(hk, aes(x=Day, y=New.Deaths, fill=Curfew)) + 
-  geom_bar(stat = "identity")+scale_fill_brewer(palette="Paired")+
+  geom_bar(width = 0.3, stat = "identity")+scale_fill_manual(values = c("#6698FF", "#153E7E"))+
   theme(axis.text.x = element_text(angle = 70, hjust = 1))) %>%
        highlight() 
 chart3 <-ggplotly(ggplot(hk, aes(x=Day, y=New.Recovered, fill=Curfew)) + 
-  geom_bar(stat = "identity")+scale_fill_brewer(palette="Paired")+
+  geom_bar(width = 0.3, stat = "identity")+scale_fill_manual(values = c("#6698FF", "#153E7E"))+
   theme(axis.text.x = element_text(angle = 70, hjust = 1))) %>%
        highlight() 
 
