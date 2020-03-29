@@ -16,7 +16,7 @@ if(cond == 1){
   rw$New.Recovered <- total_recovored - rw$Total.Recovered
   rw$Total.Recovered <- total_recovored
   rw$New.Deaths...60 <- new_deaths
-  df <- rbind(rw,df)
+  df <- rbind(df , rw)
   write.csv(df,"eg_covid.csv",row.names = F)
 }
 rmarkdown::render(input = "Corona.Rmd", output_file = "index.html")
