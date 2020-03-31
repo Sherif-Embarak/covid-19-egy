@@ -100,7 +100,7 @@ Row
 ### Cases which had an outcome `r "</br>"` `r paste0("Deaths/Discharged : ",   total_deaths, " (", round((total_deaths/closed)*100,1),"%)" )` `r "</br>"` `r paste0("Recovered/Discharged : ",   total_recovered, " (", round((total_recovered/closed)*100,1),"%)" )` 
 
 ```{r, echo=FALSE}
-valueBox(paste("Cloded Cases: ",closed))
+valueBox(paste("Closed Cases: ",closed))
 ```
 
 ### Currently Infected Patients
