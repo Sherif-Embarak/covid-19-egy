@@ -41,7 +41,8 @@ total_recovered <- df$Total.Recovered[nrow(df)]
 closed <- total_deaths+total_recovered
 active <- total_cases - closed
 library(crosstalk)
-hk <- highlight_key(df)
+df$Day <- factor(df$Day, levels = df$Day)
+hk <- highlight_key(df, ~Total.Cases)
 
 chart1 <-ggplotly(ggplot(hk, aes(x=Day, y=New.Cases, fill=Curfew)) + 
   geom_bar(width = 0.3, stat = "identity")+scale_fill_manual(values = c("#6698FF", "#153E7E"))+
