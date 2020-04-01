@@ -47,28 +47,34 @@ hk <- highlight_key(df, ~Total.Cases)
 chart1 <-ggplotly(ggplot(hk, aes(x=Day, y=New.Cases, fill=Curfew)) + 
   geom_bar(width = 0.3, stat = "identity")+scale_fill_manual(values = c("#6698FF", "#153E7E"))+
   theme(axis.text.x = element_text(angle = 70, hjust = 1))) %>%
-       highlight() 
+       highlight(off = "plotly_relayout")
 
 chart2 <-ggplotly(ggplot(hk, aes(x=Day, y=New.Deaths, fill=Curfew)) + 
   geom_bar(width = 0.3, stat = "identity")+scale_fill_manual(values = c("#6698FF", "#153E7E"))+
   theme(axis.text.x = element_text(angle = 70, hjust = 1))) %>%
-       highlight() 
+       highlight(off = "plotly_relayout")
+
 chart3 <-ggplotly(ggplot(hk, aes(x=Day, y=New.Recovered, fill=Curfew)) + 
   geom_bar(width = 0.3, stat = "identity")+scale_fill_manual(values = c("#6698FF", "#153E7E"))+
   theme(axis.text.x = element_text(angle = 70, hjust = 1))) %>%
-       highlight() 
+       highlight(off = "plotly_relayout")
 
 chart4 <- ggplotly(ggplot(data=hk, aes(x=Day, y=Total.Cases, group=1))+
  geom_line(color="#FF9900", size=1)+theme(axis.text.x = element_text(angle = 70, hjust = 1))+
-  geom_point(color="#FF9900"))
+  geom_point(color="#FF9900")) %>%
+       highlight(off = "plotly_relayout")
 
 chart5 <- ggplotly(ggplot(data=hk, aes(x=Day, y=Total.Deaths, group=1))+
  geom_line(color="#00DDDD", size=1)+theme(axis.text.x = element_text(angle = 70, hjust = 1))+
-  geom_point(color="#00DDDD"))
+  geom_point(color="#00DDDD")) %>%
+       highlight(off = "plotly_relayout")
 
 chart6 <- ggplotly(ggplot(data=hk, aes(x=Day, y=Total.Recovered, group=1))+
  geom_line(color="#33CCFF", size=1)+theme(axis.text.x = element_text(angle = 70, hjust = 1))+
-  geom_point(color="#33CCFF"))
+  geom_point(color="#33CCFF"))%>%
+       highlight(off = "plotly_relayout")
+
+
 ```
 
 Dashboard
@@ -120,7 +126,8 @@ DT::datatable(hk,class = 'cell-border stripe hover compact', rownames = FALSE , 
   formatStyle('New.Cases', backgroundColor =  '#FFEEAA') %>% 
   formatStyle('New.Deaths',backgroundColor =  'red')%>%
   formatStyle(names(df),fontWeight = 'bold')%>%
-  formatStyle('Curfew',  backgroundColor = styleEqual(c(0, 1), c('#a6cee3', '#1f78b4')))
+  formatStyle('Curfew',  backgroundColor = styleEqual(c(0, 1), c('#a6cee3', '#1f78b4')))%>%
+       highlight()
 ```
    
 Row2
