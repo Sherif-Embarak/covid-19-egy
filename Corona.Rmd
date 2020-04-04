@@ -9,6 +9,7 @@ output:
     source: embed
     vertical_layout: scroll
     orientation: rows
+    self_contained: false
 ---
 
 
