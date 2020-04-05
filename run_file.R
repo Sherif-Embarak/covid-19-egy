@@ -52,5 +52,5 @@ if(cond == 1){
   }
 }
 cat("Running rmarkdown file ...\n")
-rmarkdown::render(input = "Corona.Rmd", output_file = "test.html")
+rmarkdown::render(input = "Corona.Rmd", output_file = "index.html")
 
