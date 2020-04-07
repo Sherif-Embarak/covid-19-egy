@@ -11,11 +11,6 @@ output:
     orientation: rows
 ---
 
-
-This dashboard has been created according to <a href="https://www.worldometers.info/"> worldometers.info </a> design. In order to compensate with the lack of real time statistical data in Egypt, the given data below will be updated daily at 10:00 PM (Cairo Time).</br>
-Stay Home, Stay Safe.</br>
-
-
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 rm(list=ls(all=TRUE))
@@ -42,36 +37,37 @@ closed <- total_deaths+total_recovered
 active <- total_cases - closed
 library(crosstalk)
 df$Day <- factor(df$Day, levels = df$Day)
+xlabel <- df$Day[as.integer(seq(1 , nrow(df) , length.out = 10))]
 hk <- highlight_key(df, ~Total.Cases)
 
-chart1 <-ggplotly(ggplot(hk, aes(x=Day, y=New.Cases, fill=Curfew)) + 
+chart1 <-ggplotly(ggplot(hk, aes(x=Day, y=New.Cases, fill=Curfew)) + scale_x_discrete(breaks = xlabel)+
   geom_bar(width = 0.3, stat = "identity")+scale_fill_manual(values = c("#6698FF", "#153E7E"))+
   theme(axis.text.x = element_text(angle = 70, hjust = 1))) %>%
        highlight(off = "plotly_relayout")
 
-chart2 <-ggplotly(ggplot(hk, aes(x=Day, y=New.Deaths, fill=Curfew)) + 
+chart2 <-ggplotly(ggplot(hk, aes(x=Day, y=New.Deaths, fill=Curfew)) + scale_x_discrete(breaks = xlabel)+
   geom_bar(width = 0.3, stat = "identity")+scale_fill_manual(values = c("#6698FF", "#153E7E"))+
   theme(axis.text.x = element_text(angle = 70, hjust = 1))) %>%
        highlight(off = "plotly_relayout")
 
-chart3 <-ggplotly(ggplot(hk, aes(x=Day, y=New.Recovered, fill=Curfew)) + 
+chart3 <-ggplotly(ggplot(hk, aes(x=Day, y=New.Recovered, fill=Curfew)) + scale_x_discrete(breaks = xlabel)+
   geom_bar(width = 0.3, stat = "identity")+scale_fill_manual(values = c("#6698FF", "#153E7E"))+
   theme(axis.text.x = element_text(angle = 70, hjust = 1))) %>%
        highlight(off = "plotly_relayout")
 
-chart4 <- ggplotly(ggplot(data=hk, aes(x=Day, y=Total.Cases, group=1))+
+chart4 <- ggplotly(ggplot(data=hk, aes(x=Day, y=Total.Cases, group=1))+ scale_x_discrete(breaks = xlabel)+
+ geom_line(color="#33CCFF", size=1)+theme(axis.text.x = element_text(angle = 70, hjust = 1))+
+  geom_point(color="#33CCFF")) %>%
+       highlight(off = "plotly_relayout")
+
+chart5 <- ggplotly(ggplot(data=hk, aes(x=Day, y=Total.Deaths, group=1))+ scale_x_discrete(breaks = xlabel)+
  geom_line(color="#FF9900", size=1)+theme(axis.text.x = element_text(angle = 70, hjust = 1))+
   geom_point(color="#FF9900")) %>%
        highlight(off = "plotly_relayout")
 
-chart5 <- ggplotly(ggplot(data=hk, aes(x=Day, y=Total.Deaths, group=1))+
+chart6 <- ggplotly(ggplot(data=hk, aes(x=Day, y=Total.Recovered, group=1))+ scale_x_discrete(breaks = xlabel)+
  geom_line(color="#00DDDD", size=1)+theme(axis.text.x = element_text(angle = 70, hjust = 1))+
-  geom_point(color="#00DDDD")) %>%
-       highlight(off = "plotly_relayout")
-
-chart6 <- ggplotly(ggplot(data=hk, aes(x=Day, y=Total.Recovered, group=1))+
- geom_line(color="#33CCFF", size=1)+theme(axis.text.x = element_text(angle = 70, hjust = 1))+
-  geom_point(color="#33CCFF"))%>%
+  geom_point(color="#00DDDD"))%>%
        highlight(off = "plotly_relayout")
 
 
@@ -101,9 +97,6 @@ valueBox(total_deaths, icon = "fa-area-chart" , color="warning")
 valueBox(total_recovered, icon = "fa-area-chart" , color = "#00DDDD")
 ```
 
-Row
------------------------------------------------------------------------
-
 ### Cases which had an outcome `r "</br>"` `r paste0("Deaths/Discharged : ",   total_deaths, " (", round((total_deaths/closed)*100,1),"%)" )` `r "</br>"` `r paste0("Recovered/Discharged : ",   total_recovered, " (", round((total_recovered/closed)*100,1),"%)" )` 
 
 ```{r, echo=FALSE}
@@ -116,42 +109,28 @@ valueBox(paste("Closed Cases: ",closed))
 valueBox(paste("Active Cases: ",active))
 ```
 
-Row1{data-width=20}
+Row
 -------------------------------------
-    
-### Distibution of Cases
-    
-```{r, echo=FALSE, warning=FALSE,message=FALSE,results='asis',fig.show='asis'}
-DT::datatable(hk,class = 'cell-border stripe hover compact', rownames = FALSE , options = list(pageLength = 50,order = list(2, 'desc')))%>%
-  formatStyle('New.Cases', backgroundColor =  '#FFEEAA') %>% 
-  formatStyle('New.Deaths',backgroundColor =  'red')%>%
-  formatStyle(names(df),fontWeight = 'bold')%>%
-  formatStyle('Curfew',  backgroundColor = styleEqual(c(0, 1), c('#a6cee3', '#1f78b4')))%>%
-       highlight()
-```
-   
-Row2
--------------------------------------
-    
+
 ### Confirmed Cases per day
     
-```{r, echo=FALSE, warning=FALSE,message=FALSE,results='asis',fig.show='asis'}
+```{r, echo=FALSE ,fig.height=3}
 chart1
 ```
     
 ### Deaths per day
 
-```{r, echo=FALSE, warning=FALSE,message=FALSE,results='asis',fig.show='asis'}
+```{r, echo=FALSE ,fig.height=3}
 chart2
 ```
 
 ### Recovered Cases per day
 
-```{r, echo=FALSE, warning=FALSE,message=FALSE,results='asis',fig.show='asis'}
+```{r, echo=FALSE ,fig.height=3}
 chart3
 ```
 
-Row3
+Row
 -------------------------------------
     
 ### Total Confirmed Cases
@@ -170,4 +149,21 @@ chart5
 
 ```{r, echo=FALSE, warning=FALSE,message=FALSE,results='asis',fig.show='asis'}
 chart6
+```
+
+Column {.sidebar data-width=350}
+-------------------------------------
+
+### Distibution of Cases
+
+This dashboard has been created according to <a href="https://www.worldometers.info/"> worldometers.info </a> design. In order to compensate with the lack of real time statistical data in Egypt, the given data below will be updated daily at 10:00 PM (Cairo Time).</br>
+Stay Home, Stay Safe.</br></br>
+
+```{r, echo=FALSE }
+DT::datatable(hk,class = 'cell-border stripe hover compact', rownames = FALSE , options = list(pageLength = 10,order = list(2, 'desc')))%>%
+  formatStyle('New.Cases', backgroundColor =  '#FFEEAA') %>% 
+  formatStyle('New.Deaths',backgroundColor =  'red')%>%
+  formatStyle(names(df),fontWeight = 'bold')%>%
+  formatStyle('Curfew',  backgroundColor = styleEqual(c(0, 1), c('#a6cee3', '#1f78b4')))%>%
+       highlight()
 ```
