@@ -42,32 +42,32 @@ hk <- highlight_key(df, ~Total.Cases)
 
 chart1 <-ggplotly(ggplot(hk, aes(x=Day, y=New.Cases, fill=Curfew)) + scale_x_discrete(breaks = xlabel)+
   geom_bar(width = 0.3, stat = "identity")+scale_fill_manual(values = c("#6698FF", "#153E7E"))+
-  theme(axis.text.x = element_text(angle = 70, hjust = 1))) %>%
+  theme(panel.grid.major.x  = element_blank(), axis.text.x = element_text(angle = 70, hjust = 1)),tooltip = c("x", "y")) %>%
        highlight(off = "plotly_relayout")
 
 chart2 <-ggplotly(ggplot(hk, aes(x=Day, y=New.Deaths, fill=Curfew)) + scale_x_discrete(breaks = xlabel)+
   geom_bar(width = 0.3, stat = "identity")+scale_fill_manual(values = c("#6698FF", "#153E7E"))+
-  theme(axis.text.x = element_text(angle = 70, hjust = 1))) %>%
+  theme(panel.grid.major.x  = element_blank(), axis.text.x = element_text(angle = 70, hjust = 1)),tooltip = c("x", "y")) %>%
        highlight(off = "plotly_relayout")
 
 chart3 <-ggplotly(ggplot(hk, aes(x=Day, y=New.Recovered, fill=Curfew)) + scale_x_discrete(breaks = xlabel)+
   geom_bar(width = 0.3, stat = "identity")+scale_fill_manual(values = c("#6698FF", "#153E7E"))+
-  theme(axis.text.x = element_text(angle = 70, hjust = 1))) %>%
+  theme(panel.grid.major.x  = element_blank(), axis.text.x = element_text(angle = 70, hjust = 1)),tooltip = c("x", "y")) %>%
        highlight(off = "plotly_relayout")
 
 chart4 <- ggplotly(ggplot(data=hk, aes(x=Day, y=Total.Cases, group=1))+ scale_x_discrete(breaks = xlabel)+
- geom_line(color="#33CCFF", size=1)+theme(axis.text.x = element_text(angle = 70, hjust = 1))+
-  geom_point(color="#33CCFF")) %>%
+ geom_line(color="#33CCFF", size=1)+theme(panel.grid.major.x  = element_blank(), axis.text.x = element_text(angle = 70, hjust = 1))+
+  geom_point(color="#33CCFF"),tooltip = c("x", "y")) %>%
        highlight(off = "plotly_relayout")
 
 chart5 <- ggplotly(ggplot(data=hk, aes(x=Day, y=Total.Deaths, group=1))+ scale_x_discrete(breaks = xlabel)+
- geom_line(color="#FF9900", size=1)+theme(axis.text.x = element_text(angle = 70, hjust = 1))+
-  geom_point(color="#FF9900")) %>%
+ geom_line(color="#FF9900", size=1)+theme(panel.grid.major.x  = element_blank(), axis.text.x = element_text(angle = 70, hjust = 1))+
+  geom_point(color="#FF9900"),tooltip = c("x", "y")) %>%
        highlight(off = "plotly_relayout")
 
 chart6 <- ggplotly(ggplot(data=hk, aes(x=Day, y=Total.Recovered, group=1))+ scale_x_discrete(breaks = xlabel)+
- geom_line(color="#00DDDD", size=1)+theme(axis.text.x = element_text(angle = 70, hjust = 1))+
-  geom_point(color="#00DDDD"))%>%
+ geom_line(color="#00DDDD", size=1)+theme(panel.grid.major.x  = element_blank(), axis.text.x = element_text(angle = 70, hjust = 1))+
+  geom_point(color="#00DDDD"),tooltip = c("x", "y"))%>%
        highlight(off = "plotly_relayout")
 
 
