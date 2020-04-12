@@ -4,7 +4,6 @@ date:  "Last update: `r Sys.time()`"
 author: Sherif Embarak^[https://github.com/Sherif-Embarak/]
 output:
   flexdashboard::flex_dashboard:
-    theme: lumen
     social: menu
     source: embed
     vertical_layout: scroll
@@ -27,32 +26,65 @@ library(crosstalk)
 setwd("D:/work/git corona/")
 df <- read.csv("eg_covid.csv")
 df$Day <- mdy(df$Day)
+df$AccDay <- df$Day
 df$Day <- paste(day(df$Day) , months.Date(df$Day) )
 df$Curfew <- as.character(df$Curfew)
-df <- df[,1:8]
+df$index <- as.numeric(rownames(df))
+########################################################################
+#weekly summary
+AllDF <- df
+shift <- 4
+summary_AllDF <- data.frame(AllDF %>% mutate(week = ((as.numeric(AccDay)+shift) %/% 7) - ((as.numeric(min(AccDay))+shift) %/% 7)) %>% 
+  group_by(week) %>%
+  summarise(number_of_days= table(week), from = min(AccDay) , to = max(AccDay), sum(New.Cases) , sum(New.Deaths), sum(New.Recovered)))
+summary_AllDF$number_of_days <- as.integer(summary_AllDF$number_of_days)
+########################################################################
+df <- df[,c(1:8,12)]
+attach(df)
+next_day <- max(index)+1
+nd_new_case <-as.integer(exp(predict(glm(New.Cases~index ,family = gaussian(link = 'log') ),list(index=c(next_day)))))
+nd_new_deaths <-as.integer(exp(predict(glm(New.Deaths+0.01~index ,family = gaussian(link = 'log') ),list(index=c(next_day)))))
+nd_new_recoverd <-as.integer(exp(predict(glm(New.Recovered+0.01~index ,family = gaussian(link = 'log') ),list(index=c(next_day)))))
 total_cases <- df$Total.Cases[nrow(df)]
 total_deaths <- df$Total.Deaths[nrow(df)]
 total_recovered <- df$Total.Recovered[nrow(df)]
 closed <- total_deaths+total_recovered
 active <- total_cases - closed
-library(crosstalk)
 df$Day <- factor(df$Day, levels = df$Day)
 xlabel <- df$Day[as.integer(seq(1 , nrow(df) , length.out = 10))]
 hk <- highlight_key(df, ~Total.Cases)
 
 chart1 <-ggplotly(ggplot(hk, aes(x=Day, y=New.Cases, fill=Curfew)) + scale_x_discrete(breaks = xlabel)+
   geom_bar(width = 0.3, stat = "identity")+scale_fill_manual(values = c("#6698FF", "#153E7E"))+
-  theme(panel.grid.major.x  = element_blank(), axis.text.x = element_text(angle = 70, hjust = 1)),tooltip = c("x", "y")) %>%
+  theme(panel.grid.major.x  = element_blank(), axis.text.x = element_text(angle = 70, hjust = 1))+
+    geom_smooth(aes(x=index, y=New.Cases), method = "glm", formula = y~x,method.args = list(family = gaussian(link = 'log')))+
+    geom_text(label=paste("Tomorow's predication:",nd_new_case ), 
+    x=10,
+    y=max(New.Cases)
+  )
+  ,tooltip = c("x", "y")) %>%
        highlight(off = "plotly_relayout")
 
 chart2 <-ggplotly(ggplot(hk, aes(x=Day, y=New.Deaths, fill=Curfew)) + scale_x_discrete(breaks = xlabel)+
   geom_bar(width = 0.3, stat = "identity")+scale_fill_manual(values = c("#6698FF", "#153E7E"))+
-  theme(panel.grid.major.x  = element_blank(), axis.text.x = element_text(angle = 70, hjust = 1)),tooltip = c("x", "y")) %>%
+  theme(panel.grid.major.x  = element_blank(), axis.text.x = element_text(angle = 70, hjust = 1))+
+    geom_smooth(aes(x=index, y=New.Deaths+0.01), method = "glm", formula = y~x,method.args = list(family = gaussian(link = 'log')))+
+    geom_text(label=paste("Tomorow's predication:",nd_new_deaths ), 
+    x=10,
+    y=max(New.Deaths)
+  )
+  ,tooltip = c("x", "y")) %>%
        highlight(off = "plotly_relayout")
 
 chart3 <-ggplotly(ggplot(hk, aes(x=Day, y=New.Recovered, fill=Curfew)) + scale_x_discrete(breaks = xlabel)+
   geom_bar(width = 0.3, stat = "identity")+scale_fill_manual(values = c("#6698FF", "#153E7E"))+
-  theme(panel.grid.major.x  = element_blank(), axis.text.x = element_text(angle = 70, hjust = 1)),tooltip = c("x", "y")) %>%
+  theme(panel.grid.major.x  = element_blank(), axis.text.x = element_text(angle = 70, hjust = 1))+
+    geom_smooth(data = hk, aes(x=index, y=New.Recovered+0.01), method = "glm", formula = y~x,method.args = list(family = gaussian(link = 'log')))+
+    geom_text(label=paste("Tomorow's predication:",nd_new_recoverd ), 
+    x=10,
+    y=max(New.Recovered)
+  )
+  ,tooltip = c("x", "y")) %>%
        highlight(off = "plotly_relayout")
 
 chart4 <- ggplotly(ggplot(data=hk, aes(x=Day, y=Total.Cases, group=1))+ scale_x_discrete(breaks = xlabel)+
@@ -73,7 +105,7 @@ chart6 <- ggplotly(ggplot(data=hk, aes(x=Day, y=Total.Recovered, group=1))+ scal
 
 ```
 
-Dashboard
+Daily Dashboard
 =======================================================================
 
 Row
@@ -167,3 +199,63 @@ DT::datatable(hk,class = 'cell-border stripe hover compact', rownames = FALSE , 
   formatStyle('Curfew',  backgroundColor = styleEqual(c(0, 1), c('#a6cee3', '#1f78b4')))%>%
        highlight(on = "plotly_click" , off ="plotly_doubleclick")
 ```
+
+   
+Weekly Dashboard
+=======================================================================
+
+```{r, include=FALSE}
+weekly_hk <- highlight_key(summary_AllDF, ~week)
+chart7 <- ggplotly(ggplot(weekly_hk, aes(x=week , y=sum.New.Cases. , text =paste("from:", from, "to:",to))) +
+  geom_bar(width = 0.4 , stat = "identity" , fill="steelblue")+
+    geom_text(aes(label=sum.New.Cases.), color="black", size=3.5)+
+  theme(panel.grid.major.x  = element_blank()),tooltip = c("x", "y" , "text")) %>%
+       highlight(off = "plotly_relayout")
+
+chart8 <-ggplotly(ggplot(weekly_hk, aes(x=week , y=sum.New.Deaths. , text =paste("from:", from, "to:",to))) +
+  geom_bar(width = 0.4 , stat = "identity", fill="steelblue")+
+    geom_text(aes(label=sum.New.Deaths.), color="black", size=3.5)+
+  theme(panel.grid.major.x  = element_blank()),tooltip = c("x", "y" , "text")) %>%
+       highlight(off = "plotly_relayout")
+
+chart9 <-ggplotly(ggplot(weekly_hk, aes(x=week , y=sum.New.Recovered. , text =paste("from:", from, "to:",to))) +
+  geom_bar(width = 0.4 , stat = "identity", fill="steelblue")+
+    geom_text(aes(label=sum.New.Recovered.), color="black", size=3.5)+
+  theme(panel.grid.major.x  = element_blank()),tooltip = c("x", "y" , "text")) %>%
+       highlight(off = "plotly_relayout")
+```
+
+Row
+-------------------------------------
+    
+### Chart 1
+    
+```{r, echo=FALSE , fig.height = 2, fig.width = 2}
+DT::datatable(weekly_hk)%>%
+       highlight(on = "plotly_click" , off ="plotly_doubleclick")
+```
+
+Row
+-------------------------------------
+
+### Chart 2
+    
+```{r, echo=FALSE}
+cat("Weekly Distribution of New Confirmed Cases")
+chart7
+``` 
+    
+### Chart 3
+    
+```{r, echo=FALSE}
+cat("Weekly Distribution of New Recovered Cases")
+chart8
+```
+    
+### Chart 4
+
+```{r, echo=FALSE}
+cat("Weekly Distribution of New Deaths")
+chart9
+```
+
