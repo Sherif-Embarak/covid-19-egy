@@ -252,3 +252,7 @@ List of 1
 
 
 "D:/Anaconda/Scripts/pandoc" +RTS -K512m -RTS Corona.utf8.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output index.html --email-obfuscation none --self-contained --standalone --section-divs --template "C:\Users\sheri\OneDrive\Documents\R\win-library\3.6\flexdashboard\rmarkdown\templates\flex_dashboard\resources\default.html" --include-in-header "C:\Users\sheri\AppData\Local\Temp\Rtmpyyljfu\rmarkdown-str7a5c5a547d.html" --variable "theme:cosmo" --include-in-header "C:\Users\sheri\AppData\Local\Temp\Rtmpyyljfu\rmarkdown-str7a5c5c11267e.html" --mathjax --variable "mathjax-url:https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" --lua-filter "C:/Users/sheri/OneDrive/Documents/R/win-library/3.6/rmarkdown/rmd/lua/pagebreak.lua" --lua-filter "C:/Users/sheri/OneDrive/Documents/R/win-library/3.6/rmarkdown/rmd/lua/latex-div.lua" --include-in-header "C:\Users\sheri\AppData\Local\Temp\Rtmpyyljfu\file7a5c12155e1ehtml" --include-after-body "C:\Users\sheri\AppData\Local\Temp\Rtmpyyljfu\file7a5c1b553a4f.html" --highlight-style pygments --include-before-body "C:\Users\sheri\AppData\Local\Temp\Rtmpyyljfu\file7a5c2c262086.html" --include-after-body "C:\Users\sheri\AppData\Local\Temp\Rtmpyyljfu\file7a5c78912a0.html" 
+
+ ------------------- 
+ 2020-04-15 20:35:36 
+Nothing new
