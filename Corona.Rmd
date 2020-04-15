@@ -54,7 +54,7 @@ df$Day <- factor(df$Day, levels = df$Day)
 xlabel <- df$Day[as.integer(seq(1 , nrow(df) , length.out = 10))]
 hk <- highlight_key(df, ~Total.Cases)
 
-chart1 <-ggplotly(ggplot(hk, aes(x=Day, y=New.Cases, fill=Curfew)) + scale_x_discrete(breaks = xlabel)+
+chart1 <-ggplotly(ggplot(hk, aes(x=Day, y=New.Cases)) + scale_x_discrete(breaks = xlabel)+
   geom_bar(width = 0.3, stat = "identity")+scale_fill_manual(values = c("#6698FF", "#153E7E"))+
   theme(panel.grid.major.x  = element_blank(), axis.text.x = element_text(angle = 70, hjust = 1))+
     geom_smooth(aes(x=index, y=New.Cases), method = "glm", formula = y~x,method.args = list(family = gaussian(link = 'log')))+
@@ -65,7 +65,7 @@ chart1 <-ggplotly(ggplot(hk, aes(x=Day, y=New.Cases, fill=Curfew)) + scale_x_dis
   ,tooltip = c("x", "y")) %>%
        highlight(off = "plotly_relayout")
 
-chart2 <-ggplotly(ggplot(hk, aes(x=Day, y=New.Deaths, fill=Curfew)) + scale_x_discrete(breaks = xlabel)+
+chart2 <-ggplotly(ggplot(hk, aes(x=Day, y=New.Deaths)) + scale_x_discrete(breaks = xlabel)+
   geom_bar(width = 0.3, stat = "identity")+scale_fill_manual(values = c("#6698FF", "#153E7E"))+
   theme(panel.grid.major.x  = element_blank(), axis.text.x = element_text(angle = 70, hjust = 1))+
     geom_smooth(aes(x=index, y=New.Deaths+0.01), method = "glm", formula = y~x,method.args = list(family = gaussian(link = 'log')))+
@@ -76,7 +76,7 @@ chart2 <-ggplotly(ggplot(hk, aes(x=Day, y=New.Deaths, fill=Curfew)) + scale_x_di
   ,tooltip = c("x", "y")) %>%
        highlight(off = "plotly_relayout")
 
-chart3 <-ggplotly(ggplot(hk, aes(x=Day, y=New.Recovered, fill=Curfew)) + scale_x_discrete(breaks = xlabel)+
+chart3 <-ggplotly(ggplot(hk, aes(x=Day, y=New.Recovered)) + scale_x_discrete(breaks = xlabel)+
   geom_bar(width = 0.3, stat = "identity")+scale_fill_manual(values = c("#6698FF", "#153E7E"))+
   theme(panel.grid.major.x  = element_blank(), axis.text.x = element_text(angle = 70, hjust = 1))+
     geom_smooth(data = hk, aes(x=index, y=New.Recovered+0.01), method = "glm", formula = y~x,method.args = list(family = gaussian(link = 'log')))+
@@ -107,6 +107,8 @@ chart6 <- ggplotly(ggplot(data=hk, aes(x=Day, y=Total.Recovered, group=1))+ scal
 
 Daily Dashboard
 =======================================================================
+This dashboard has been created according to <a href="https://www.worldometers.info/"> worldometers.info </a> design. In order to compensate with the lack of real time statistical data in Egypt, the given data below will be updated daily at 10:00 PM (Cairo Time).</br>
+Stay Home, Stay Safe.</br></br>
 
 Row
 -----------------------------------------------------------------------
@@ -139,6 +141,20 @@ valueBox(paste("Closed Cases: ",closed))
 
 ```{r, echo=FALSE}
 valueBox(paste("Active Cases: ",active))
+```
+
+Row
+-------------------------------------
+
+### Distibution of Cases
+
+```{r, echo=FALSE }
+DT::datatable(hk,class = 'cell-border stripe hover compact', rownames = FALSE , options = list(pageLength = 1,order = list(2, 'desc')))%>%
+  formatStyle('New.Cases', backgroundColor =  '#FFEEAA') %>% 
+  formatStyle('New.Deaths',backgroundColor =  'red')%>%
+  formatStyle(names(df),fontWeight = 'bold')%>%
+  formatStyle('Curfew',  backgroundColor = styleEqual(c(0, 1), c('#a6cee3', '#1f78b4')))%>%
+       highlight(on = "plotly_click" , off ="plotly_doubleclick")
 ```
 
 Row
@@ -183,23 +199,6 @@ chart5
 chart6
 ```
 
-Column {.sidebar data-width=350}
--------------------------------------
-
-### Distibution of Cases
-
-This dashboard has been created according to <a href="https://www.worldometers.info/"> worldometers.info </a> design. In order to compensate with the lack of real time statistical data in Egypt, the given data below will be updated daily at 10:00 PM (Cairo Time).</br>
-Stay Home, Stay Safe.</br></br>
-
-```{r, echo=FALSE }
-DT::datatable(hk,class = 'cell-border stripe hover compact', rownames = FALSE , options = list(pageLength = 10,order = list(2, 'desc')))%>%
-  formatStyle('New.Cases', backgroundColor =  '#FFEEAA') %>% 
-  formatStyle('New.Deaths',backgroundColor =  'red')%>%
-  formatStyle(names(df),fontWeight = 'bold')%>%
-  formatStyle('Curfew',  backgroundColor = styleEqual(c(0, 1), c('#a6cee3', '#1f78b4')))%>%
-       highlight(on = "plotly_click" , off ="plotly_doubleclick")
-```
-
    
 Weekly Dashboard
 =======================================================================
@@ -238,24 +237,21 @@ DT::datatable(weekly_hk)%>%
 Row
 -------------------------------------
 
-### Chart 2
+### Weekly Distribution of New Confirmed Cases
     
 ```{r, echo=FALSE}
-cat("Weekly Distribution of New Confirmed Cases")
 chart7
 ``` 
     
-### Chart 3
+### Weekly Distribution of New Recovered Cases
     
 ```{r, echo=FALSE}
-cat("Weekly Distribution of New Recovered Cases")
 chart8
 ```
     
-### Chart 4
+### Weekly Distribution of New Deaths
 
 ```{r, echo=FALSE}
-cat("Weekly Distribution of New Deaths")
 chart9
 ```
 

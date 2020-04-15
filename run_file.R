@@ -15,7 +15,7 @@ if(cond == 1){
   total_recovered <- as.numeric(readline(prompt="Enter total recovered: "))
   df <- read.csv("eg_covid.csv")
   rw <- df[nrow(df),]
-  rw$Day <- format(Sys.Date(),"%m/%d/%Y")
+  rw$Day <- format(Sys.Date()-1,"%m/%d/%Y")
   rw$New.Cases <- new_cases
   rw$Total.Cases <- as.numeric(rw$Total.Cases)+new_cases
   rw$New.Deaths <- new_deaths
