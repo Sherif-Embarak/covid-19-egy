@@ -7,3 +7,6 @@ get_values <- function(){
   values <- as.numeric(gsub("([0-9]+).*$", "\\1", values))
   return(as.numeric(c(values[1],values[2] , values[6])))
 }
+
+page <- read_html("D:/National Bank of Egypt - ATM and branches.html")
+values <- page%>% html_nodes("[class='atm-res ATMBranchSearchListItem']")%>%html_text()
