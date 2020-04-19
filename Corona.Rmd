@@ -79,7 +79,7 @@ chart2 <-ggplotly(ggplot(hk, aes(x=Day, y=New.Deaths)) + scale_x_discrete(breaks
 chart3 <-ggplotly(ggplot(hk, aes(x=Day, y=New.Recovered)) + scale_x_discrete(breaks = xlabel)+
   geom_bar(width = 0.3, stat = "identity")+scale_fill_manual(values = c("#6698FF", "#153E7E"))+
   theme(panel.grid.major.x  = element_blank(), axis.text.x = element_text(angle = 70, hjust = 1))+
-    geom_smooth(data = hk, aes(x=index, y=New.Recovered+0.01), method = "glm", formula = y~x,method.args = list(family = binomial))+
+    geom_smooth(data = hk, aes(x=index, y=New.Recovered+0.01), method = "glm", formula = y~x,method.args = list(family = gaussian(link = 'log')))+
     geom_text(label=paste("Tomorrow's predication:",nd_new_recoverd ), 
     x=10,
     y=max(New.Recovered)
