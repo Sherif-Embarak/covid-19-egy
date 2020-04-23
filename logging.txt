@@ -1380,3 +1380,415 @@ Nothing new
  ------------------- 
  2020-04-21 21:15:36 
 Nothing new
+
+ ------------------- 
+ 2020-04-22 21:20:36 
+Automaticlly New Recored add
+Running rmarkdown file ...
+  |                                                                              |                                                                      |   0%  |                                                                              |..                                                                    |   3%
+   inline R code fragments
+
+  |                                                                              |....                                                                  |   5%
+label: setup (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                              |......                                                                |   8%
+  ordinary text without R code
+
+  |                                                                              |........                                                              |  11%
+label: unnamed-chunk-1 (with options) 
+List of 1
+ $ echo: logi FALSE
+
+  |                                                                              |.........                                                             |  14%
+  ordinary text without R code
+
+  |                                                                              |...........                                                           |  16%
+label: unnamed-chunk-2 (with options) 
+List of 1
+ $ echo: logi FALSE
+
+  |                                                                              |.............                                                         |  19%
+  ordinary text without R code
+
+  |                                                                              |...............                                                       |  22%
+label: unnamed-chunk-3 (with options) 
+List of 1
+ $ echo: logi FALSE
+
+  |                                                                              |.................                                                     |  24%
+   inline R code fragments
+
+  |                                                                              |...................                                                   |  27%
+label: unnamed-chunk-4 (with options) 
+List of 1
+ $ echo: logi FALSE
+
+  |                                                                              |.....................                                                 |  30%
+  ordinary text without R code
+
+  |                                                                              |.......................                                               |  32%
+label: unnamed-chunk-5 (with options) 
+List of 1
+ $ echo: logi FALSE
+
+  |                                                                              |.........................                                             |  35%
+  ordinary text without R code
+
+  |                                                                              |..........................                                            |  38%
+label: unnamed-chunk-6 (with options) 
+List of 1
+ $ echo: logi FALSE
+
+  |                                                                              |............................                                          |  41%
+  ordinary text without R code
+
+  |                                                                              |..............................                                        |  43%
+label: unnamed-chunk-7 (with options) 
+List of 2
+ $ echo      : logi FALSE
+ $ fig.height: num 3
+
+  |                                                                              |................................                                      |  46%
+  ordinary text without R code
+
+  |                                                                              |..................................                                    |  49%
+label: unnamed-chunk-8 (with options) 
+List of 2
+ $ echo      : logi FALSE
+ $ fig.height: num 3
+
+  |                                                                              |....................................                                  |  51%
+  ordinary text without R code
+
+  |                                                                              |......................................                                |  54%
+label: unnamed-chunk-9 (with options) 
+List of 2
+ $ echo      : logi FALSE
+ $ fig.height: num 3
+
+  |                                                                              |........................................                              |  57%
+  ordinary text without R code
+
+  |                                                                              |..........................................                            |  59%
+label: unnamed-chunk-10 (with options) 
+List of 5
+ $ echo    : logi FALSE
+ $ warning : logi FALSE
+ $ message : logi FALSE
+ $ results : chr "asis"
+ $ fig.show: chr "asis"
+
+  |                                                                              |............................................                          |  62%
+  ordinary text without R code
+
+  |                                                                              |.............................................                         |  65%
+label: unnamed-chunk-11 (with options) 
+List of 5
+ $ echo    : logi FALSE
+ $ warning : logi FALSE
+ $ message : logi FALSE
+ $ results : chr "asis"
+ $ fig.show: chr "asis"
+
+  |                                                                              |...............................................                       |  68%
+  ordinary text without R code
+
+  |                                                                              |.................................................                     |  70%
+label: unnamed-chunk-12 (with options) 
+List of 5
+ $ echo    : logi FALSE
+ $ warning : logi FALSE
+ $ message : logi FALSE
+ $ results : chr "asis"
+ $ fig.show: chr "asis"
+
+  |                                                                              |...................................................                   |  73%
+  ordinary text without R code
+
+  |                                                                              |.....................................................                 |  76%
+label: unnamed-chunk-13 (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                              |.......................................................               |  78%
+  ordinary text without R code
+
+  |                                                                              |.........................................................             |  81%
+label: unnamed-chunk-14 (with options) 
+List of 3
+ $ echo      : logi FALSE
+ $ fig.height: num 2
+ $ fig.width : num 2
+
+  |                                                                              |...........................................................           |  84%
+  ordinary text without R code
+
+  |                                                                              |.............................................................         |  86%
+label: unnamed-chunk-15 (with options) 
+List of 1
+ $ echo: logi FALSE
+
+  |                                                                              |..............................................................        |  89%
+  ordinary text without R code
+
+  |                                                                              |................................................................      |  92%
+label: unnamed-chunk-16 (with options) 
+List of 1
+ $ echo: logi FALSE
+
+  |                                                                              |..................................................................    |  95%
+  ordinary text without R code
+
+  |                                                                              |....................................................................  |  97%
+label: unnamed-chunk-17 (with options) 
+List of 1
+ $ echo: logi FALSE
+
+  |                                                                              |......................................................................| 100%
+  ordinary text without R code
+
+
+"D:/Anaconda/Scripts/pandoc" +RTS -K512m -RTS Corona.utf8.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output index.html --email-obfuscation none --self-contained --standalone --section-divs --template "C:\Users\sheri\OneDrive\Documents\R\win-library\3.6\flexdashboard\rmarkdown\templates\flex_dashboard\resources\default.html" --include-in-header "C:\Users\sheri\AppData\Local\Temp\RtmpuWxWna\rmarkdown-str8a6044171f1.html" --variable "theme:cosmo" --include-in-header "C:\Users\sheri\AppData\Local\Temp\RtmpuWxWna\rmarkdown-str8a6065287589.html" --mathjax --variable "mathjax-url:https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" --lua-filter "C:/Users/sheri/OneDrive/Documents/R/win-library/3.6/rmarkdown/rmd/lua/pagebreak.lua" --lua-filter "C:/Users/sheri/OneDrive/Documents/R/win-library/3.6/rmarkdown/rmd/lua/latex-div.lua" --include-in-header "C:\Users\sheri\AppData\Local\Temp\RtmpuWxWna\file8a60773e7c43html" --include-after-body "C:\Users\sheri\AppData\Local\Temp\RtmpuWxWna\file8a605bcc1c0f.html" --highlight-style pygments --include-before-body "C:\Users\sheri\AppData\Local\Temp\RtmpuWxWna\file8a60120b2edb.html" --include-after-body "C:\Users\sheri\AppData\Local\Temp\RtmpuWxWna\file8a6014297f52.html" 
+
+ ------------------- 
+ 2020-04-22 21:25:36 
+
+ ------------------- 
+ 2020-04-22 21:30:35 
+Nothing new
+
+ ------------------- 
+ 2020-04-23 19:30:30 
+Nothing new
+
+ ------------------- 
+ 2020-04-23 19:45:30 
+Nothing new
+
+ ------------------- 
+ 2020-04-23 20:00:31 
+Nothing new
+
+ ------------------- 
+ 2020-04-23 20:15:31 
+Nothing new
+
+ ------------------- 
+ 2020-04-23 20:30:30 
+Automaticlly New Recored add
+Running rmarkdown file ...
+  |                                                                              |                                                                      |   0%  |                                                                              |..                                                                    |   3%
+   inline R code fragments
+
+  |                                                                              |....                                                                  |   5%
+label: setup (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                              |......                                                                |   8%
+  ordinary text without R code
+
+  |                                                                              |........                                                              |  11%
+label: unnamed-chunk-1 (with options) 
+List of 1
+ $ echo: logi FALSE
+
+  |                                                                              |.........                                                             |  14%
+  ordinary text without R code
+
+  |                                                                              |...........                                                           |  16%
+label: unnamed-chunk-2 (with options) 
+List of 1
+ $ echo: logi FALSE
+
+  |                                                                              |.............                                                         |  19%
+  ordinary text without R code
+
+  |                                                                              |...............                                                       |  22%
+label: unnamed-chunk-3 (with options) 
+List of 1
+ $ echo: logi FALSE
+
+  |                                                                              |.................                                                     |  24%
+   inline R code fragments
+
+  |                                                                              |...................                                                   |  27%
+label: unnamed-chunk-4 (with options) 
+List of 1
+ $ echo: logi FALSE
+
+  |                                                                              |.....................                                                 |  30%
+  ordinary text without R code
+
+  |                                                                              |.......................                                               |  32%
+label: unnamed-chunk-5 (with options) 
+List of 1
+ $ echo: logi FALSE
+
+  |                                                                              |.........................                                             |  35%
+  ordinary text without R code
+
+  |                                                                              |..........................                                            |  38%
+label: unnamed-chunk-6 (with options) 
+List of 1
+ $ echo: logi FALSE
+
+  |                                                                              |............................                                          |  41%
+  ordinary text without R code
+
+  |                                                                              |..............................                                        |  43%
+label: unnamed-chunk-7 (with options) 
+List of 2
+ $ echo      : logi FALSE
+ $ fig.height: num 3
+
+  |                                                                              |................................                                      |  46%
+  ordinary text without R code
+
+  |                                                                              |..................................                                    |  49%
+label: unnamed-chunk-8 (with options) 
+List of 2
+ $ echo      : logi FALSE
+ $ fig.height: num 3
+
+  |                                                                              |....................................                                  |  51%
+  ordinary text without R code
+
+  |                                                                              |......................................                                |  54%
+label: unnamed-chunk-9 (with options) 
+List of 2
+ $ echo      : logi FALSE
+ $ fig.height: num 3
+
+  |                                                                              |........................................                              |  57%
+  ordinary text without R code
+
+  |                                                                              |..........................................                            |  59%
+label: unnamed-chunk-10 (with options) 
+List of 5
+ $ echo    : logi FALSE
+ $ warning : logi FALSE
+ $ message : logi FALSE
+ $ results : chr "asis"
+ $ fig.show: chr "asis"
+
+  |                                                                              |............................................                          |  62%
+  ordinary text without R code
+
+  |                                                                              |.............................................                         |  65%
+label: unnamed-chunk-11 (with options) 
+List of 5
+ $ echo    : logi FALSE
+ $ warning : logi FALSE
+ $ message : logi FALSE
+ $ results : chr "asis"
+ $ fig.show: chr "asis"
+
+  |                                                                              |...............................................                       |  68%
+  ordinary text without R code
+
+  |                                                                              |.................................................                     |  70%
+label: unnamed-chunk-12 (with options) 
+List of 5
+ $ echo    : logi FALSE
+ $ warning : logi FALSE
+ $ message : logi FALSE
+ $ results : chr "asis"
+ $ fig.show: chr "asis"
+
+  |                                                                              |...................................................                   |  73%
+  ordinary text without R code
+
+  |                                                                              |.....................................................                 |  76%
+label: unnamed-chunk-13 (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                              |.......................................................               |  78%
+  ordinary text without R code
+
+  |                                                                              |.........................................................             |  81%
+label: unnamed-chunk-14 (with options) 
+List of 3
+ $ echo      : logi FALSE
+ $ fig.height: num 2
+ $ fig.width : num 2
+
+  |                                                                              |...........................................................           |  84%
+  ordinary text without R code
+
+  |                                                                              |.............................................................         |  86%
+label: unnamed-chunk-15 (with options) 
+List of 1
+ $ echo: logi FALSE
+
+  |                                                                              |..............................................................        |  89%
+  ordinary text without R code
+
+  |                                                                              |................................................................      |  92%
+label: unnamed-chunk-16 (with options) 
+List of 1
+ $ echo: logi FALSE
+
+  |                                                                              |..................................................................    |  95%
+  ordinary text without R code
+
+  |                                                                              |....................................................................  |  97%
+label: unnamed-chunk-17 (with options) 
+List of 1
+ $ echo: logi FALSE
+
+  |                                                                              |......................................................................| 100%
+  ordinary text without R code
+
+
+"D:/Anaconda/Scripts/pandoc" +RTS -K512m -RTS Corona.utf8.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output index.html --email-obfuscation none --self-contained --standalone --section-divs --template "C:\Users\sheri\OneDrive\Documents\R\win-library\3.6\flexdashboard\rmarkdown\templates\flex_dashboard\resources\default.html" --include-in-header "C:\Users\sheri\AppData\Local\Temp\RtmpAHB4TN\rmarkdown-strf34204977d8.html" --variable "theme:cosmo" --include-in-header "C:\Users\sheri\AppData\Local\Temp\RtmpAHB4TN\rmarkdown-strf341f836d77.html" --mathjax --variable "mathjax-url:https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" --lua-filter "C:/Users/sheri/OneDrive/Documents/R/win-library/3.6/rmarkdown/rmd/lua/pagebreak.lua" --lua-filter "C:/Users/sheri/OneDrive/Documents/R/win-library/3.6/rmarkdown/rmd/lua/latex-div.lua" --include-in-header "C:\Users\sheri\AppData\Local\Temp\RtmpAHB4TN\filef341e3b59f8html" --include-after-body "C:\Users\sheri\AppData\Local\Temp\RtmpAHB4TN\filef34104ce77.html" --highlight-style pygments --include-before-body "C:\Users\sheri\AppData\Local\Temp\RtmpAHB4TN\filef3440b3640.html" --include-after-body "C:\Users\sheri\AppData\Local\Temp\RtmpAHB4TN\filef342b7f4705.html" 
+
+ ------------------- 
+ 2020-04-23 20:35:36 
+Nothing new
+
+ ------------------- 
+ 2020-04-23 20:40:36 
+
+ ------------------- 
+ 2020-04-23 20:45:36 
+Nothing new
+
+ ------------------- 
+ 2020-04-23 20:50:35 
+Nothing new
+
+ ------------------- 
+ 2020-04-23 20:55:35 
+Nothing new
+
+ ------------------- 
+ 2020-04-23 21:00:35 
+Nothing new
+
+ ------------------- 
+ 2020-04-23 21:05:35 
+Nothing new
+
+ ------------------- 
+ 2020-04-23 21:10:35 
+Nothing new
+
+ ------------------- 
+ 2020-04-23 21:15:35 
+Nothing new
+
+ ------------------- 
+ 2020-04-23 21:20:35 
+Nothing new
+
+ ------------------- 
+ 2020-04-23 21:25:35 
+Nothing new
+
+ ------------------- 
+ 2020-04-23 21:30:35 
+Nothing new
