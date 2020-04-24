@@ -243,13 +243,13 @@ Row
 chart7
 ``` 
     
-### Weekly Distribution of New Recovered Cases
+### Weekly Distribution of New Deaths
     
 ```{r, echo=FALSE}
 chart8
 ```
     
-### Weekly Distribution of New Deaths
+### Weekly Distribution of New Recovered Cases
 
 ```{r, echo=FALSE}
 chart9
