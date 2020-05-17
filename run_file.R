@@ -38,7 +38,7 @@ if(cond == 1){
     cat("Nothing new\n")
     stop("Nothing new\n")
   }else{
-    rw$Day <- format(Sys.Date(),"%m/%d/%Y")
+    rw$Day <- format(Sys.Date()-1,"%m/%d/%Y")
     rw$New.Cases <- new_cases
     rw$Total.Cases <- as.numeric(rw$Total.Cases)+new_cases
     rw$New.Deaths <- new_deaths
