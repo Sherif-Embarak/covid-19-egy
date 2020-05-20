@@ -204,6 +204,7 @@ Weekly Dashboard
 =======================================================================
 
 ```{r, include=FALSE}
+summary_AllDF$week <- as.character(summary_AllDF$week)
 weekly_hk <- highlight_key(summary_AllDF, ~week)
 chart7 <- ggplotly(ggplot(weekly_hk, aes(x=week , y=sum.New.Cases. , text =paste("from:", from, "to:",to))) +
   geom_bar(width = 0.4 , stat = "identity" , fill="steelblue")+
