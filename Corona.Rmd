@@ -22,6 +22,7 @@ library(plotly)
 library(knitr)
 library(lubridate)
 library(crosstalk)
+library(scales)
 
 setwd("D:/work/git corona/")
 df <- read.csv("eg_covid.csv")
@@ -49,9 +50,14 @@ total_cases <- df$Total.Cases[nrow(df)]
 total_deaths <- df$Total.Deaths[nrow(df)]
 total_recovered <- df$Total.Recovered[nrow(df)]
 closed <- total_deaths+total_recovered
+closed_curve <- AllDF$New.Deaths + AllDF$New.Recovered
 active <- total_cases - closed
 df$Day <- factor(df$Day, levels = df$Day)
 xlabel <- df$Day[as.integer(seq(1 , nrow(df) , length.out = 10))]
+rate_of_death <- (AllDF$Total.Deaths / (AllDF$Total.Deaths+AllDF$Total.Recovered))*100
+rate_of_death <- round(rate_of_death , 2)
+
+
 hk <- highlight_key(df, ~Total.Cases)
 
 chart1 <-ggplotly(ggplot(hk, aes(x=Day, y=New.Cases)) + scale_x_discrete(breaks = xlabel)+
@@ -98,6 +104,20 @@ chart5 <- ggplotly(ggplot(data=hk, aes(x=Day, y=Total.Deaths, group=1))+ scale_x
        highlight(off = "plotly_relayout")
 
 chart6 <- ggplotly(ggplot(data=hk, aes(x=Day, y=Total.Recovered, group=1))+ scale_x_discrete(breaks = xlabel)+
+ geom_line(color="#00DDDD", size=1)+theme(panel.grid.major.x  = element_blank(), axis.text.x = element_text(angle = 70, hjust = 1))+
+  geom_point(color="#00DDDD"),tooltip = c("x", "y"))%>%
+       highlight(off = "plotly_relayout")
+
+chart10 <- ggplotly(ggplot(data=hk, aes(x=Day, y=closed_curve, group=1))+ scale_x_discrete(breaks = xlabel)+
+ geom_line(color="#00DDDD", size=1)+theme(panel.grid.major.x  = element_blank(), axis.text.x = element_text(angle = 70, hjust = 1))+
+  geom_point(color="#00DDDD"),tooltip = c("x", "y"))%>%
+       highlight(off = "plotly_relayout")
+
+hk2 <- highlight_key(df[15:nrow(df),], ~Total.Cases)
+rate_of_death <- rate_of_death[15:nrow(df)]
+
+chart11 <- ggplotly(ggplot(data=hk2, aes(x=Day, y=rate_of_death, group=1))+ 
+                      ylab("Rate of Death (%)") +scale_x_discrete(breaks = xlabel)+
  geom_line(color="#00DDDD", size=1)+theme(panel.grid.major.x  = element_blank(), axis.text.x = element_text(angle = 70, hjust = 1))+
   geom_point(color="#00DDDD"),tooltip = c("x", "y"))%>%
        highlight(off = "plotly_relayout")
@@ -200,11 +220,27 @@ chart6
 ```
 
    
+Row
+-------------------------------------
+    
+### Number of closed cases per day
+    
+```{r, echo=FALSE, warning=FALSE,message=FALSE,results='asis',fig.show='asis'}
+chart10
+```
+    
+### Rate of death after first 2 weeks
+
+```{r, echo=FALSE, warning=FALSE,message=FALSE,results='asis',fig.show='asis'}
+chart11
+```
+
+
 Weekly Dashboard
 =======================================================================
 
 ```{r, include=FALSE}
-summary_AllDF$week <- as.character(summary_AllDF$week)
+summary_AllDF$week <- as.factor(summary_AllDF$week)
 weekly_hk <- highlight_key(summary_AllDF, ~week)
 chart7 <- ggplotly(ggplot(weekly_hk, aes(x=week , y=sum.New.Cases. , text =paste("from:", from, "to:",to))) +
   geom_bar(width = 0.4 , stat = "identity" , fill="steelblue")+
@@ -223,6 +259,9 @@ chart9 <-ggplotly(ggplot(weekly_hk, aes(x=week , y=sum.New.Recovered. , text =pa
     geom_text(aes(label=sum.New.Recovered.), color="black", size=3.5)+
   theme(panel.grid.major.x  = element_blank()),tooltip = c("x", "y" , "text")) %>%
        highlight(off = "plotly_relayout")
+
+plot(x = AllDF$AccDay[15:length(rate_of_death)], y = rate_of_death[15:length(rate_of_death)],xlab = "Day" , ylab = "Rate of death" , ylim = c(10,30) )
+lines(x = AllDF$AccDay[15:length(rate_of_death)], y = rate_of_death[15:length(rate_of_death)] )
 ```
 
 Row
